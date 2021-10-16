@@ -1,9 +1,11 @@
 import React, {useEffect, useState } from "react";
 import axios from "axios";
 import "../Css/PostsScreen.css"
-import FilterPost from "../Component/FilterPost";
+import FilterLinks from "../Component/FilterLinks";
 function LinksScreen() {
   const [allPosts, setAllPosts] = useState(0);
+  const [brokenInternal, setBrokenInternal] = useState([]);
+  const [brokenExternal, setBrokenExternal] = useState([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async () => {
@@ -13,29 +15,54 @@ function LinksScreen() {
 
     setAllPosts(Posts.data.posts);
     
+    
   };
+
   useEffect(() => {
     console.log("useEfeecet called");
     fetchData();
     
+    
   }, []);
+  useEffect(()=>{
+    console.log("ha")
+    const BrokenInternal=[]
+    const BrokenExternal=[]
+    const InternalLinks = Object.entries(allPosts).filter((post) =>
+    post[1].url.includes("https://ghost-blog.ipxp.in/")
+  );
+  const ExternalLinks=Object.entries(allPosts).filter(post=>!post[1].url.includes("https://ghost-blog.ipxp.in/"))
+ if(ExternalLinks.length>0){
+   ExternalLinks.forEach((a)=>{
+    fetch(allPosts).then((res) => {
+      if (res.status < 300) {
+        BrokenExternal.push(a[1].url);
+      }
+    });
+    setBrokenExternal(BrokenExternal)
+   })
+ }
+  if(InternalLinks.length>0){
+
+    InternalLinks.forEach((Link) => {
+      fetch(Link).then((res) => {
+        if (res.status < 300) {
+          BrokenInternal.push(Link[1].url);
+        }
+      });
+      setBrokenInternal(BrokenInternal);
+     
+    });
+  }
+  
+  },[allPosts])
   // var Links
   return (
     <div className="postFilterCards">
-    {/* {(()=>{
-      Links= Object.entries(allPosts).filter(post=>post[1].url.includes("https://ghost-blog.ipxp.in/"))
-     })()} */}
-     {/* {console.log(Links)} */}
-      {/* {console.log(allPosts)} */}
 
-                  <FilterPost Heading="Total Link Count" data={allPosts}/>
-                  <FilterPost Heading="Total Broken Internal Links" data={allPosts}/>
-                  <FilterPost Heading="Total Broken External Links" Links={Object.entries(allPosts).filter(post=>!post[1].url.includes("https://ghost-blog.ipxp.in/"))}/>
-
-
-
-
-              
+                  <FilterLinks key={1} Heading="Total Link Count" datas={allPosts.length}/>
+                  <FilterLinks key={21} Heading="Total Broken Internal Links" datas={brokenInternal}/>
+                  <FilterLinks key={3} Heading="Total Broken External Links" datas={brokenExternal}/>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function OutlinedCard({ Data, Name }) {
       <Card variant="outlined">
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            {Name} {Data}
+            <h4>{Name} {Data}</h4>
           </Typography>
         </CardContent>
         <CardActions>
