@@ -1,8 +1,8 @@
 .postFilterCards{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(349px,1fr));
-    grid-template-rows: repeat (2,1fr );
-    gap: 20px;
+    grid-gap: 20px;
+    /* gap: 20px; */
     padding: 20px;
     
 }

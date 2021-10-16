@@ -19,6 +19,8 @@ function PostsScreen() {
     fetchData();
   }, []);
   return (
+    <>
+    <h1>Posts</h1>
     <div className="postFilterCards">
       {/* {console.log(allPosts)} */}
       {/* {console.log(Object.entries(allPosts).map((a)=>{console.log(a[1].excerpt.length)}))} */}
@@ -29,6 +31,7 @@ function PostsScreen() {
                   <FilterPost key={4} Heading="Too long Posts more than 1500 words" datas={Object.entries(allPosts).filter(post=>post[1].excerpt.length>1500)}/>
                   <FilterPost key={5}  Heading="Too Short Posts ,less than 250 words" datas={Object.entries(allPosts).filter(post=>post[1].excerpt.length<250)}/>
     </div>
+    </>
   );
 }
 

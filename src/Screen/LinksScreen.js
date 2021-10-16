@@ -58,12 +58,16 @@ function LinksScreen() {
   },[allPosts])
   // var Links
   return (
+    <>
+    <h1>Links</h1>
+    
     <div className="postFilterCards">
 
                   <FilterLinks key={1} Heading="Total Link Count" datas={allPosts.length}/>
                   <FilterLinks key={21} Heading="Total Broken Internal Links" datas={brokenInternal}/>
                   <FilterLinks key={3} Heading="Total Broken External Links" datas={brokenExternal}/>
     </div>
+    </>
   );
 }
 
