@@ -3,6 +3,7 @@ import { Link, BrowserRouter, Switch, Route } from "react-router-dom";
 import HomeScreem from "./Screen/HomeScree";
 import DashboardScreen from "./Screen/DashboardScreen";
 import PostsScreen from "./Screen/PostsScreen";
+import LinksScreen from "./Screen/LinksScreen";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/Posts">
           <PostsScreen/>
+        </Route>
+        <Route path="/Links">
+          <LinksScreen/>
         </Route>
       </Switch>
     </BrowserRouter>

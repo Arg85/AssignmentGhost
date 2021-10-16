@@ -21,11 +21,13 @@ function PostsScreen() {
   return (
     <div className="postFilterCards">
       {console.log(allPosts)}
+      {/* {console.log(Object.entries(allPosts).map((a)=>{console.log(a[1].excerpt.length)}))} */}
 
-                  <FilterPost data={Object.entries(allPosts).filter(post=>post[1].meta_description===null)}/>
-                  <FilterPost data={Object.entries(allPosts).filter(post=>post[1].meta_description!==null && post[1].meta_description.length>50 ) }/>
-     {/* {Object.entries(allPosts).map((a)=>{return console.log(a[1].url.length)})} */}
-                  <FilterPost data={Object.entries(allPosts).filter(post=>post[1].url.length>100)}/>
+                  <FilterPost Heading="Without Meta Description" data={Object.entries(allPosts).filter(post=>post[1].meta_description===null)}/>
+                  <FilterPost Heading="Too long Meta Description" data={Object.entries(allPosts).filter(post=>post[1].meta_description!==null && post[1].meta_description.length>50 ) }/>
+                  <FilterPost Heading="Too long Url more than 100 words" data={Object.entries(allPosts).filter(post=>post[1].url.length>100)}/>
+                  <FilterPost Heading="Too long Posts more than 1500 words" data={Object.entries(allPosts).filter(post=>post[1].excerpt.length>1500)}/>
+                  <FilterPost  Heading="Too Short Posts ,less than 250 words" data={Object.entries(allPosts).filter(post=>post[1].excerpt.length<250)}/>
     </div>
   );
 }
